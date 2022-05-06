@@ -45,3 +45,41 @@ function newElement() {
     };
   }
 }
+
+function handleSilderChange(input) {
+  var el = document.getElementById("outputValue");
+  el.textContent = input + "%";
+}
+
+function submitForm(stocks, startDate, risk) {
+  let data = { tickers: stocks, start_date: startDate, risk: risk };
+  try {
+    fetch("/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function handleFormSubmit() {
+  let stocks = [];
+  let stockList = document.getElementsByTagName("li");
+
+  for (let i = 0; i < stockList.length; i++) {
+    let val = stockList[i].textContent;
+    let tickers = val.substr(0, val.length - 1);
+    stocks.push(tickers);
+  }
+
+  let startDate = document.getElementById("dateInput").value;
+  let risk = document.getElementById("outputValue").textContent;
+  submitForm(stocks, startDate, risk);
+  console.log(`Stocks: ${stocks}, StartDate: ${startDate}, Risk: ${risk}`);
+}
