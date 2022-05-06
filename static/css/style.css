@@ -129,7 +129,7 @@ ul li:nth-child(odd) {
 
 /* Darker background-color on hover */
 ul li:hover {
-  background: #ddd;
+  background: rgb(176, 255, 176);
 }
 
 /* Style the close button */
