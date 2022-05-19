@@ -13,12 +13,13 @@ def index():
     if request.method == "POST":
         body = request.get_json()
         tickers = body["tickers"]
+        print(tickers)
         # start_date = body["start_date"]
-        # # risk_factor = request.form["risk"]
+        risk_factor = body["risk"]
         # tail = start_date[4 : len(start_date)]
         # end_date = int(start_date[0:4]) + 2
         # end_date_str = str(end_date) + tail
-        market_data = run(tickers=tickers, budget=1000000)
+        market_data = run(tickers, 1000000, risk_factor)
         list_of_files = glob.glob(
             "/resources"
         )  # * means all if need specific format then *.csv
@@ -26,7 +27,6 @@ def index():
         print(latest_file)
         # print(market_data)
         # return market_data
-
     return render_template("index.html")
 
 

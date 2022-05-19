@@ -51,8 +51,8 @@ function handleSilderChange(input) {
   el.textContent = input + "%";
 }
 
-function submitForm(stocks, startDate, risk) {
-  let data = { tickers: stocks, start_date: startDate, risk: risk };
+function submitForm(stocks, risk) {
+  let data = { tickers: stocks,  risk: risk };
   try {
     fetch("/", {
       method: "POST",
@@ -78,8 +78,7 @@ function handleFormSubmit() {
     stocks.push(tickers);
   }
 
-  let startDate = document.getElementById("dateInput").value;
-  let risk = document.getElementById("outputValue").textContent;
-  submitForm(stocks, startDate, risk);
-  console.log(`Stocks: ${stocks}, StartDate: ${startDate}, Risk: ${risk}`);
+  let risk = document.getElementById("riskInput").textContent;
+  submitForm(stocks, risk);
+  console.log(`Stocks: ${stocks}, Risk: ${risk}`);
 }
